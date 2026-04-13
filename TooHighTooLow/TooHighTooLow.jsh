@@ -6,39 +6,60 @@ import java.util.Scanner;
 class TooHighTooLow {
     private int number;
     private int guesses;
+    private static final int MAX_GUESSES = 6;
 
     public TooHighTooLow() {
         // setup number to be a random number from 1 to 100
-        // TODO: Create a Random object
-        // TODO: Set this.number to a random integer from 1 to 100 (hint: use nextInt)
-        // TODO: Set this.guesses to 0
+        Random random = new Random();
+        this.number = random.nextInt(100) + 1;
+        this.guesses = 0;
     }
 
     public void play() {
         Scanner scanner = new Scanner(System.in);
 
+         { 
+            Random random = new Random();
+            this.number = random.nextInt(100) + 1;
+            this.guesses += 1;
+            System.out.println("Welcome to the Too High Too Low Game!");
+            System.out.println("I have selected a random number between 1 and 100. Can you guess it? You have " + MAX_GUESSES + " attempts to guess the number.");
+        
+
         while (true) {
-            // TODO: Get a number guess from the user (between 1 and 100)
-            // TODO: Print a prompt asking for a guess
-            // TODO: Read an integer from the scanner and store it in a variable called guess
+            // Get a number guess from the user (between 1 and 100)
+            System.out.print("Enter your guess (1-100): ");
+             int guess = scanner.nextInt();
+             System.out.println("You guessed: " + guess);
+             System.out.println("Number of guesses: " + (guesses));
+            // System.out.println("The number is: " + number);
 
-            // TODO: Increment the number of guesses by 1
+             // Increment the number of guesses
+             guesses++;
 
-            // TODO: Check if the guess equals the secret number
-            // TODO: If correct, print a congratulations message with the number of guesses
-            // TODO: Exit the loop using break
+             // Check if the guess is correct
+             if (guess == number) {
+                 System.out.println("Congratulations! You've guessed the number in " + (MAX_GUESSES - guesses) + " guesses!");
+                 scanner.close();
+                 break;
+             } else if (guess < number) {
+                 System.out.println("Too low!");
+             } else {
+                 System.out.println("Too high!");
+             }
 
-            // TODO: Check if the guess is less than the secret number
-            // TODO: If so, print "Too low!"
+             // Check if the player has made too many guesses
+             if (guesses > MAX_GUESSES) {
+                 System.out.println("Sorry, you've run out of guesses. The number was: " + number);
+                 scanner.close();
+                 break;
+             }
 
-            // TODO: Check if the guess is greater than the secret number
-            // TODO: If so, print "Too high!"
-
-            // TODO: Check if the player has made 10 or more guesses
-            // TODO: If so, print a message saying they've run out of guesses and reveal the number
-            // TODO: Exit the loop using break
+            System.out.println(); // Print a blank line for better readability
         }
     }
+}
+
 
     public static void main(String[] args) {
         TooHighTooLow game = new TooHighTooLow();
@@ -47,4 +68,4 @@ class TooHighTooLow {
 }
 
 // Run the game
-TooHighTooLow.main(null);
+//TooHighTooLow.main(null);
